@@ -17,7 +17,7 @@ export default function CardVote({
   selected,
   disabled = false,
   onClick,
-}: CardVoteProps) {
+}: Readonly<CardVoteProps>) {
   return (
     <Card
       onClick={() => !disabled && onClick(id)}
