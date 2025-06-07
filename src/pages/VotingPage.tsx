@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Typography,
@@ -32,6 +32,10 @@ export default function VotingPage() {
   const [hasVoted, setHasVoted] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const year = new Date().getFullYear();
+
+  useEffect(() => {
+    document.title = "gshow | BBB";
+  }, []);
 
   const navigate = useNavigate();
   const handleVote = async (id: string) => {
