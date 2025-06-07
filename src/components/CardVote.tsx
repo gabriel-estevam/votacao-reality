@@ -1,4 +1,3 @@
-// components/CardVote.tsx
 import { Card, Typography, Avatar } from "@mui/material";
 
 interface CardVoteProps {
