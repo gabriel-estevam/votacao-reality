@@ -93,6 +93,18 @@ export default function VotingPage() {
             />
           ))}
         </Stack>
+        {!hasVoted && selectedId && (
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={() => handleVote(selectedId)}
+            sx={{ mt: 4 }}
+          >
+            Confirmar Voto
+          </Button>
+        )}
+
         {hasVoted && selectedId && (
           <Alert severity="success" sx={{ mt: 4 }}>
             Seu voto para {participants.find(p => p.id === selectedId)?.name} foi registrado com sucesso!
