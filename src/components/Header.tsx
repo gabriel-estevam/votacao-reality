@@ -20,10 +20,9 @@ export default function Header() {
           px: { xs: 2, sm: 4 },
         }}
       >
-        {/* Esquerda: Menu + Gshow */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
+            <MenuIcon fontSize="large"/>
           </IconButton>
           <Typography variant="h6" sx={{ fontWeight: "bold", ml: 1 }}>
             <span style={{ color: "white" }}>g</span>
@@ -31,14 +30,12 @@ export default function Header() {
           </Typography>
         </Box>
 
-        {/* Centro: BBB */}
         <Typography variant="h6" sx={{ color: "white", position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
           BBB
         </Typography>
 
-        {/* Direita: Usuário */}
         <IconButton color="inherit" aria-label="user">
-          <AccountCircleIcon />
+          <AccountCircleIcon fontSize="large"/>
         </IconButton>
       </Toolbar>
     </AppBar>

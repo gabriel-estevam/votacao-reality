@@ -3,9 +3,10 @@ import {
   Container,
   Typography,
   Button,
-  Alert,
+  Box,
+  Paper,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { CheckCircle } from "@mui/icons-material";
 import Stack from "@mui/material/Stack";
 import Header from "../components/Header";
 import CardVote from "../components/CardVote";
@@ -37,82 +38,132 @@ export default function VotingPage() {
     document.title = "gshow | BBB";
   }, []);
 
-  const navigate = useNavigate();
-  const handleVote = async (id: string) => {
-    const token = localStorage.getItem("token");
-    if (!token) return navigate("/login");
-
-    try {
-      const response = await fetch("/api/vote", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ participantId: id }),
-      });
-
-      if (response.ok) {
-        setHasVoted(true);
-        setSelectedId(id);
-      } else if (response.status === 401) {
-        navigate("/login");
-      } else {
-        alert("Erro ao registrar voto. Tente novamente.");
-      }
-    } catch (error) {
-      console.error(error);
+  const handleVote = () => {
+    if (selectedId) {
+      setHasVoted(true);
     }
   };
+
+  const handleReset = () => {
+    setHasVoted(false);
+    setSelectedId(null);
+  };
+
+  const selectedParticipant = participants.find(p => p.id === selectedId);
 
   return (
     <>
       <Header />
-      <Container maxWidth={false} disableGutters sx={{ textAlign: "center", mt: 10, px: 2 }}>
-        <Typography variant="h4" fontWeight="bold" gutterBottom>
-          Voto Único: quem você quer eliminar do BBB {year.toString().slice(-2)}?
-        </Typography>
-        <Typography variant="body1" color="text.secondary" mb={4}>
-          Vote para definir quem deve deixar o Big Brother Brasil {year} no décimo terceiro Paredão da temporada!
-        </Typography>
+      <Container
+        maxWidth="sm"
+        sx={{ mt: 10, px: 2, display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
+        {!hasVoted ? (
+          <>
+          <Typography variant="h4" fontWeight="bold" gutterBottom textAlign="center" whiteSpace="nowrap">
+              Voto Único: quem você quer eliminar do BBB {year.toString().slice(-2)}?
+            </Typography>
+            <Typography variant="body1" color="text.secondary" mb={4} textAlign="center" whiteSpace="nowrap">
+              Vote para definir quem deve deixar o Big Brother Brasil {year} no décimo terceiro Paredão da temporada!
+            </Typography>
 
-        <Stack
-          direction="column"
-          spacing={3}
-          alignItems="center"
-          justifyContent="center"
-        >
-          {participants.map((p) => (
-            <CardVote
-              key={p.id}
-              id={p.id}
-              name={p.name}
-              image={p.image}
-              selected={selectedId === p.id}
-              disabled={hasVoted}
-              onClick={setSelectedId}
-            />
-          ))}
-        </Stack>
-        {!hasVoted && selectedId && (
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={() => handleVote(selectedId)}
-            sx={{ mt: 4 }}
+            <Stack spacing={3} alignItems="center" width="100%">
+              {participants.map((p) => (
+                <CardVote
+                  key={p.id}
+                  id={p.id}
+                  name={p.name}
+                  image={p.image}
+                  selected={selectedId === p.id}
+                  disabled={hasVoted}
+                  onClick={setSelectedId}
+                />
+              ))}
+            </Stack>
+
+            {selectedId && (
+              <Button
+                variant="contained"
+                size="large"
+                onClick={handleVote}
+                sx={{
+                  mt: 4,
+                  backgroundColor: "#4a00e0",
+                  color: "white",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  width: "100%",
+                  maxWidth: 400
+                }}
+              >
+                Confirmar Voto
+              </Button>
+            )}
+          </>
+        ) : (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
+            minHeight="60vh"
+            gap={3}
           >
-            Confirmar Voto
-          </Button>
-        )}
+            <Paper
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                p: 2,
+                width: "100%",
+                maxWidth: 500,
+                borderRadius: 2,
+                backgroundColor: "#fff",
+                boxShadow: "none",
+                border: "1px solid #eee",
+              }}
+            >
+              <Box>
+                <Box display="flex" alignItems="center" gap={1} mb={1}>
+                  <CheckCircle sx={{ color: "green", fontSize: 20 }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Seu voto
+                  </Typography>
+                </Box>
+                <Typography variant="h6" fontWeight="bold">
+                  {selectedParticipant?.name}
+                </Typography>
+              </Box>
+              <Box
+                component="img"
+                src={selectedParticipant?.image}
+                alt={selectedParticipant?.name}
+                sx={{ height: 64 }}
+              />
+            </Paper>
 
-        {hasVoted && selectedId && (
-          <Alert severity="success" sx={{ mt: 4 }}>
-            Seu voto para {participants.find(p => p.id === selectedId)?.name} foi registrado com sucesso!
-          </Alert>
+            <Button
+              variant="contained"
+              onClick={handleReset}
+              sx={{
+                backgroundColor: "#4a00e0",
+                color: "white",
+                fontWeight: "bold",
+                textTransform: "none",
+                width: "100%",
+                maxWidth: 500,
+                borderRadius: 2,
+                "&:hover": {
+                  backgroundColor: "#3600b3",
+                },
+              }}
+            >
+              Votar Novamente
+            </Button>
+          </Box>
         )}
       </Container>
-
     </>
   );
 }
