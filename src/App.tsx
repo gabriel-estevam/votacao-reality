@@ -1,13 +1,13 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import VotingPage from "./pages/VotingPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import routes from "./routes";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Redireciona de / para /votacao */}
-        <Route path="/" element={<Navigate to="/votacao" />} />
-        <Route path="/votacao" element={<VotingPage />} />
+        {routes.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
       </Routes>
     </Router>
   );

@@ -1,8 +1,44 @@
-import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Box,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleProfile = () => {
+    handleClose();
+    navigate("/conta");
+  };
+
+  const handleLogout = () => {
+    handleClose();
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -22,7 +58,7 @@ export default function Header() {
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon fontSize="large"/>
+            <MenuIcon fontSize="large" />
           </IconButton>
           <Typography variant="h5" sx={{ fontWeight: "bold", ml: 1 }}>
             <span style={{ color: "white" }}>g</span>
@@ -30,13 +66,50 @@ export default function Header() {
           </Typography>
         </Box>
 
-        <Typography variant="h5" sx={{ color: "white", position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
+        <Typography
+          variant="h5"
+          sx={{
+            color: "white",
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
           BBB
         </Typography>
 
-        <IconButton color="inherit" aria-label="user">
-          <AccountCircleIcon fontSize="large"/>
-        </IconButton>
+        <Box>
+          <IconButton color="inherit" onClick={handleMenuClick}>
+            <AccountCircleIcon fontSize="large" />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            transformOrigin={{ vertical: "top", horizontal: "center" }}
+            PaperProps={{
+              sx: {
+                minWidth: 160,
+                px: 1,
+              },
+            }}
+          >
+
+            <MenuItem onClick={handleProfile}>
+              <ListItemIcon>
+                <PersonIcon fontSize="small" />
+              </ListItemIcon>
+              Conta
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <LogoutIcon fontSize="small" />
+              </ListItemIcon>
+              Sair
+            </MenuItem>
+          </Menu>
+        </Box>
       </Toolbar>
     </AppBar>
   );
