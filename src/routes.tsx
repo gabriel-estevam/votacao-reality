@@ -15,6 +15,11 @@ const routes = [
     path: "/conta",
     element: <AccountSettings />
   },
+
+   {
+    path: "*",
+    element: <Navigate to="/votacao" replace />,
+  },
 ];
 
 export default routes;
