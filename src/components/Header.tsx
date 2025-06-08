@@ -24,13 +24,13 @@ export default function Header() {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon fontSize="large"/>
           </IconButton>
-          <Typography variant="h6" sx={{ fontWeight: "bold", ml: 1 }}>
+          <Typography variant="h5" sx={{ fontWeight: "bold", ml: 1 }}>
             <span style={{ color: "white" }}>g</span>
             <span style={{ color: "#00e0ff" }}>show</span>
           </Typography>
         </Box>
 
-        <Typography variant="h6" sx={{ color: "white", position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
+        <Typography variant="h5" sx={{ color: "white", position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
           BBB
         </Typography>
 

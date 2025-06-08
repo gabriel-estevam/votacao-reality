@@ -56,7 +56,7 @@ export default function VotingPage() {
       <Header />
       <Container
         maxWidth="sm"
-        sx={{ mt: 10, px: 2, display: "flex", flexDirection: "column", alignItems: "center" }}
+        sx={{ mt: 20, px: 2, display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         {!hasVoted ? (
           <>
