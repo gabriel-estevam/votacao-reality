@@ -7,18 +7,14 @@ import {
     Divider,
     Paper,
     Button,
-    InputAdornment,
-    MenuItem
-} from "@mui/material";
+    InputAdornment} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
 
 export default function AccountSettings() {
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "Jessica Alba",
         email: "jenny@gmail.com",
