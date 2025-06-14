@@ -11,11 +11,20 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
+interface HeaderProps {
+  title?: string;
+  backgroundColor?: string;
+  rightMenuItems?: React.ReactNode;
+}
+
+export default function Header({
+  title = "Título",
+  backgroundColor = "#5700c9",
+  rightMenuItems,
+}: Readonly<HeaderProps>) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -28,11 +37,6 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  const handleProfile = () => {
-    handleClose();
-    navigate("/conta");
-  };
-
   const handleLogout = () => {
     handleClose();
     localStorage.clear();
@@ -43,7 +47,7 @@ export default function Header() {
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: "#5700c9",
+        backgroundColor,
         boxShadow: 2,
         width: "100%",
       }}
@@ -75,7 +79,7 @@ export default function Header() {
             transform: "translateX(-50%)",
           }}
         >
-          BBB
+          {title}
         </Typography>
 
         <Box>
@@ -95,13 +99,8 @@ export default function Header() {
               },
             }}
           >
+            {rightMenuItems}
 
-            <MenuItem onClick={handleProfile}>
-              <ListItemIcon>
-                <PersonIcon fontSize="small" />
-              </ListItemIcon>
-              Conta
-            </MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <LogoutIcon fontSize="small" />

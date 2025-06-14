@@ -5,11 +5,15 @@ import {
   Button,
   Box,
   Paper,
+  MenuItem,
+  ListItemIcon,
 } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import Stack from "@mui/material/Stack";
 import Header from "../components/Header";
 import CardVote from "../components/CardVote";
+import { useNavigate } from "react-router-dom";
+import PersonIcon from '@mui/icons-material/Person';
 
 const participants = [
   {
@@ -30,6 +34,7 @@ const participants = [
 ];
 
 export default function VotingPage() {
+  const navigate = useNavigate();
   const [hasVoted, setHasVoted] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const year = new Date().getFullYear();
@@ -53,14 +58,25 @@ export default function VotingPage() {
 
   return (
     <>
-      <Header />
+      <Header
+        rightMenuItems={
+          <MenuItem onClick={() => {
+            navigate("/conta");
+          }}>
+            <ListItemIcon>
+              <PersonIcon fontSize="small"/>
+            </ListItemIcon>
+            Conta
+          </MenuItem>
+        }
+      />
       <Container
         maxWidth="sm"
         sx={{ mt: 20, px: 2, display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         {!hasVoted ? (
           <>
-          <Typography variant="h4" fontWeight="bold" gutterBottom textAlign="center" whiteSpace="nowrap">
+            <Typography variant="h4" fontWeight="bold" gutterBottom textAlign="center" whiteSpace="nowrap">
               Voto Único: quem você quer eliminar do BBB {year.toString().slice(-2)}?
             </Typography>
             <Typography variant="body1" color="text.secondary" mb={4} textAlign="center" whiteSpace="nowrap">
