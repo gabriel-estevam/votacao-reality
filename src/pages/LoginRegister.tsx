@@ -191,6 +191,7 @@ function LoginRegister() {
                 mx: "auto",
                 mt: 20,
                 p: 4,
+                border: "1px solid #3f51b5",
                 borderRadius: 2,
                 boxShadow: 3,
                 bgcolor: "white"
