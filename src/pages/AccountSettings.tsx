@@ -167,7 +167,7 @@ export default function AccountSettings() {
                         </Box>
                     ))}
 
-                    <Button variant="contained" color="primary" fullWidth sx={{ mt: 4 }}>
+                    <Button variant="contained" color="secondary" fullWidth sx={{ mt: 4 }}>
                         Salvar Alterações
                     </Button>
                 </Paper>

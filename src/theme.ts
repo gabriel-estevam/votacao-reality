@@ -1,3 +1,4 @@
+import { blue } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -6,7 +7,7 @@ const theme = createTheme({
       main: '#5700c9',
     },
     secondary: {
-      main: '#00e0ff',
+      main: blue[700],
     },
     background: {
       default: '#f5f5f5',

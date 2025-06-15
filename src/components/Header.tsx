@@ -8,7 +8,8 @@ import {
   MenuItem,
   ListItemIcon,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Link as RouterLink } from "react-router-dom";
+import { Link } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
@@ -21,7 +22,7 @@ interface HeaderProps {
 }
 
 export default function Header({
-  title = "Título",
+  title = "BBB",
   backgroundColor = "#5700c9",
   rightMenuItems,
 }: Readonly<HeaderProps>) {
@@ -60,15 +61,15 @@ export default function Header({
           px: { xs: 2, sm: 4 },
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon fontSize="large" />
-          </IconButton>
-          <Typography variant="h5" sx={{ fontWeight: "bold", ml: 1 }}>
-            <span style={{ color: "white" }}>g</span>
-            <span style={{ color: "#00e0ff" }}>show</span>
-          </Typography>
-        </Box>
+        <Link
+          component={RouterLink}
+          to="/votacao"
+          underline="none"
+          sx={{ fontWeight: "bold", fontSize: "1.5rem", ml: 1 }}
+        >
+          <span style={{ color: "white" }}>g</span>
+          <span style={{ color: "#00e0ff" }}>show</span>
+        </Link>
 
         <Typography
           variant="h5"
