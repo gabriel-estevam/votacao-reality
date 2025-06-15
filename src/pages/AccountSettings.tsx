@@ -7,7 +7,8 @@ import {
     Divider,
     Paper,
     Button,
-    InputAdornment} from "@mui/material";
+    InputAdornment
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -58,7 +59,6 @@ export default function AccountSettings() {
                     justifyContent: "center",
                     alignItems: "center",
                     minHeight: "100vh",
-                    mt: 8,
                 }}
             >
                 <Paper
@@ -147,7 +147,15 @@ export default function AccountSettings() {
                                                     {showPassword ? <VisibilityOff /> : <Visibility />}
                                                 </IconButton>
                                             </InputAdornment>
-                                        )
+                                        ),
+                                        sx: {
+                                            "&:before": {
+                                                borderBottomColor: "#3f51b5",
+                                            },
+                                            "&:after": {
+                                                borderBottomColor: "#3f51b5",
+                                            },
+                                        },
                                     }}
                                 />
                             ) : (
