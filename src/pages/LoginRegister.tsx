@@ -15,8 +15,6 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-// ... imports mantidos
-
 function LoginRegister() {
     const [tab, setTab] = useState("login");
     const [showPassword, setShowPassword] = useState(false);
@@ -64,7 +62,7 @@ function LoginRegister() {
                         )
                     }}
                 />
-                <Button variant="contained" fullWidth sx={{ mt: 3 }}>
+                <Button variant="contained" color="primary" fullWidth sx={{ mt: 3 }}>
                     Enviar
                 </Button>
             </Box>
@@ -121,11 +119,11 @@ function LoginRegister() {
                             setLoginData({ email: "", password: "" });
                         }}
                     >
-                        Forget Password?
+                        Esqueceu a Senha?
                     </Typography>
                 </Box>
-                <Button variant="contained" fullWidth sx={{ mt: 3, bgcolor: "#4a00e0" }}>
-                    SIGN IN
+                <Button variant="contained" color="primary" fullWidth sx={{ mt: 3 }}>
+                    CONTINUAR
                 </Button>
             </>
         );
@@ -179,7 +177,7 @@ function LoginRegister() {
                         setRegisterData({ ...registerData, birthdate: e.target.value })
                     }
                 />
-                <Button variant="contained" fullWidth sx={{ mt: 3 }}>
+                <Button variant="contained" color="primary" fullWidth sx={{ mt: 3 }}>
                     Registrar
                 </Button>
             </>
@@ -189,9 +187,9 @@ function LoginRegister() {
     return (
         <Box
             sx={{
-                width: 420, // 🔧 aumentada a largura
+                width: 420,
                 mx: "auto",
-                my: 8,
+                mt: 20,
                 p: 4,
                 borderRadius: 2,
                 boxShadow: 3,
@@ -216,17 +214,16 @@ function LoginRegister() {
                     value={tab}
                     onChange={handleChangeTab}
                     centered
-                    TabIndicatorProps={{ sx: { backgroundColor: "#d500f9" } }}
                     sx={{
                         mb: 2,
                         "& .MuiTab-root": {
                             minWidth: 120,
-                            mx: 4, // espaçamento horizontal entre os tabs (equivale a `gap`)
+                            mx: 4,
                         }
                     }}
                 >
                     <Tab label="LOGIN" value="login" sx={{ fontWeight: "bold" }} />
-                    <Tab label="REGISTER" value="register" sx={{ fontWeight: "bold" }} />
+                    <Tab label="REGISTRAR" value="register" sx={{ fontWeight: "bold" }} />
                 </Tabs>
 
 
