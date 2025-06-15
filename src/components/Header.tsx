@@ -7,13 +7,12 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
+  Link,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import { Link } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 interface HeaderProps {
   title?: string;
