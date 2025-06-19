@@ -3,7 +3,6 @@ import {
     Button,
     InputAdornment,
     IconButton,
-    Box
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
@@ -58,6 +57,24 @@ export default function RegisterForm() {
                     {...register("password")}
                     error={!!errors.password}
                     helperText={errors.password?.message}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton onClick={() => setShowPassword((s) => !s)} edge="end">
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+                <TextField
+                    fullWidth
+                    label="Confirmar Senha"
+                    type={showPassword ? "text" : "password"}
+                    margin="normal"
+                    {...register("confirmPassword")}
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword?.message}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

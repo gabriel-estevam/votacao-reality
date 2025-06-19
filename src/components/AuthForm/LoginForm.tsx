@@ -15,7 +15,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { LoginData, loginSchema } from "../../validators/zod/loginSchema";
 
-interface Props {
+type Props = {
   onForgotPassword: () => void;
 }
 

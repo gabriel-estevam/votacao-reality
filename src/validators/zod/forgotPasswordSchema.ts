@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { registerSchema } from "./registerSchema";
+import { registerBaseSchema } from "./registerSchema";
 
-export const forgotPasswordSchema = registerSchema.pick({ email: true });
+export const forgotPasswordSchema = registerBaseSchema.pick({
+  email: true,
+});
+
 export type ForgotPasswordData = z.infer<typeof forgotPasswordSchema>;

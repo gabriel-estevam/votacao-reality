@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { registerSchema } from "./registerSchema";
+import { registerBaseSchema } from "./registerSchema";
 
 export const loginSchema = z.object({
-  email: registerSchema.shape.email,
-  password: z.string().nonempty("Senha é obrigatório"),
+  email: registerBaseSchema.shape.email,
+  password: z.string().nonempty("Senha é obrigatória"),
 });
 
 export type LoginData = z.infer<typeof loginSchema>;
