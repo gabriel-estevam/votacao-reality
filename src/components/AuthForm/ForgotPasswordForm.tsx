@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ForgotPasswordData, forgotPasswordSchema } from "../../validators/zod/forgotPasswordSchema";
 
-interface ForgotPasswordProps {
+type ForgotPasswordProps = {
   onBack: () => void;
 }
 

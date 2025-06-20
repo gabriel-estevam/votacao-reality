@@ -1,6 +1,6 @@
 import { Card, Typography, Avatar } from "@mui/material";
 
-interface CardVoteProps {
+type CardVoteProps = {
   id: string;
   name: string;
   image: string;

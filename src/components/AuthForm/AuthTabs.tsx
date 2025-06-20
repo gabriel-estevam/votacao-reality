@@ -1,7 +1,6 @@
-// AuthTabs.tsx
 import { Tabs, Tab } from "@mui/material";
 
-interface AuthTabsProps {
+type AuthTabsProps = {
   value: "login" | "register";
   onChange: (_: React.SyntheticEvent, newValue: "login" | "register") => void;
 }

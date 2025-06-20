@@ -14,7 +14,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 
-interface HeaderProps {
+type HeaderProps = {
   title?: string;
   backgroundColor?: string;
   rightMenuItems?: React.ReactNode;
