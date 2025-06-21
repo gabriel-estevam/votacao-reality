@@ -63,7 +63,7 @@ export default function LoginForm({ onForgotPassword }: Readonly<Props>) {
           ),
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+              <IconButton onClick={() => setShowPassword(!showPassword)} edge="end" data-testid="toggle-password">
                 {showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>

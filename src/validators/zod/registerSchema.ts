@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const registerBaseSchema = z.object({
   name: z.string().nonempty("Nome é obrigatório"),
-  email: z.string().email("Email inválido").nonempty("Email é obrigatório"),
+  email: z.string().email("Email inválido"),
   password: z.string().min(3, "Senha deve ter pelo menos 3 caracteres"),
   confirmPassword: z.string().min(3, "Confirmação de senha é obrigatória"),
   birthdate: z.date({

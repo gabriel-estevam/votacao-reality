@@ -3,7 +3,7 @@ import { registerBaseSchema } from "./registerSchema";
 
 export const loginSchema = z.object({
   email: registerBaseSchema.shape.email,
-  password: z.string().nonempty("Senha é obrigatória"),
+  password: registerBaseSchema.shape.password,
 });
 
 export type LoginData = z.infer<typeof loginSchema>;
