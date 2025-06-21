@@ -78,7 +78,7 @@ describe("LoginForm", () => {
         expect(await screen.findByText(/email inválido/i)).toBeInTheDocument();
     });
 
-    it.skip("validates minimum password length", async () => {
+    it.only("validates minimum password length", async () => {
         renderLoginForm();
 
         await userEvent.type(screen.getByRole("textbox", { name: /email/i }), "valid@email.com");
