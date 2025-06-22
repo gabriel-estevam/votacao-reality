@@ -30,7 +30,7 @@ export default function RegisterForm() {
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate data-testid="form-register">
                 <TextField
                     fullWidth
                     label="Nome Completo"

@@ -27,6 +27,9 @@ export default function BirthdateField() {
                                 margin: "normal",
                                 error: !!errors.birthdate,
                                 helperText: typeof errors.birthdate?.message === "string" ? errors.birthdate?.message : undefined,
+                                inputProps: { 
+                                    'data-testid': 'formatted-date',
+                                }
                             },
                         }}
                     />
