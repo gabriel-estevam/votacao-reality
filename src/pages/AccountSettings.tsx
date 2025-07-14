@@ -7,7 +7,8 @@ import {
     Divider,
     Paper,
     Button,
-    InputAdornment
+    InputAdornment,
+    ClickAwayListener
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Visibility from "@mui/icons-material/Visibility";
@@ -20,18 +21,18 @@ import {
     accountSettingsSchema,
     accountSettingsData
 } from "../validators/zod/accountSettingsSchema";
-import { DeleteOutline, Remove } from "@mui/icons-material";
+import { Remove } from "@mui/icons-material";
 
 export default function AccountSettings() {
     const [editing, setEditing] = useState<{ [key: string]: boolean }>({});
     const [showPassword, setShowPassword] = useState(false);
     const [image, setImage] = useState("https://randomuser.me/api/portraits/women/44.jpg");
+    const [showAvatarActions, setShowAvatarActions] = useState(false);
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-        setValue,
         getValues
     } = useForm<accountSettingsData>({
         resolver: zodResolver(accountSettingsSchema),
@@ -81,77 +82,71 @@ export default function AccountSettings() {
                         width: "100%"
                     }}
                 >
-                    <Box
-                        sx={{
-                            position: "relative",
-                            display: "inline-block",
-                            width: 100,
-                            height: 100,
-                            mx: "auto",
-                            mb: 1,
-                            "&:hover .avatar-actions": {
-                                opacity: 1,
-                                transform: "translateY(0)",
-                                pointerEvents: "auto",
-                            },
-                        }}
-                    >
-                        <Avatar
-                            src={image || undefined}
-                            sx={{ width: "100%", height: "100%" }}
-                        />
+                    <ClickAwayListener onClickAway={() => setShowAvatarActions(false)}>
+                        <Box sx={{ position: "relative", display: "inline-flex", alignItems: "center" }}>
+                            <Avatar
+                                src={image || undefined}
+                                sx={{
+                                    width: 100,
+                                    height: 100,
+                                    transition: "transform 0.3s ease-in-out",
+                                    borderRadius: "50%",
+                                    cursor: "pointer",
+                                    "&:hover": {
+                                        transform: "scale(1.05)",
+                                    },
+                                }}
+                                onClick={() => setShowAvatarActions((prev) => !prev)}
+                            />
 
-                        {/* Ícones flutuantes com transição */}
-                        <Box
-                            className="avatar-actions"
-                            sx={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: 1,
-                                opacity: 0,
-                                pointerEvents: "none",
-                                transform: "translateY(10px)",
-                                transition: "all 0.3s ease-in-out",
-                                bgcolor: "rgba(0,0,0,0.4)",
-                                borderRadius: "50%",
-                            }}
-                        >
-                            <IconButton
-                                onClick={() => setImage("")}
-                                sx={{
-                                    bgcolor: "white",
-                                    color: "#3f51b5",
-                                    "&:hover": {
-                                        bgcolor: "#f0f0f0",
-                                    },
-                                }}
-                            >
-                                <Remove />
-                            </IconButton>
-                            <IconButton
-                                component="label"
-                                sx={{
-                                    bgcolor: "white",
-                                    color: "#3f51b5",
-                                    "&:hover": {
-                                        bgcolor: "#f0f0f0",
-                                    },
-                                }}
-                            >
-                                <EditIcon />
-                                <input hidden accept="image/*" type="file" onChange={handleImageChange} />
-                            </IconButton>
+                            {showAvatarActions && (
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: 1,
+                                        position: "absolute",
+                                        left: "110%",
+                                        top: "0%",
+                                        borderRadius: 2,
+                                        padding: 0.5,
+                                        boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                                        zIndex: 1,
+                                    }}
+                                >
+                                    <IconButton
+                                        component="label"
+                                        sx={{
+                                            bgcolor: "white",
+                                            color: "#3f51b5",
+                                            "&:hover": {
+                                                bgcolor: "#f0f0f0",
+                                            },
+                                            p: 0.5,
+                                        }}
+                                    >
+                                        <EditIcon />
+                                        <input hidden accept="image/*" type="file" onChange={handleImageChange} />
+                                    </IconButton>
+                                    <IconButton
+                                        onClick={() => setImage("")}
+                                        sx={{
+                                            bgcolor: "white",
+                                            color: "#3f51b5",
+                                            "&:hover": {
+                                                bgcolor: "#f0f0f0",
+                                            },
+                                            p: 0.5,
+                                        }}
+                                    >
+                                        <Remove />
+                                    </IconButton>
+                                </Box>
+                            )}
                         </Box>
-                    </Box>
+                    </ClickAwayListener>
 
-                    <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem", mt: 1 }}>
                         {getValues("name")}
                     </Typography>
                     <Typography
